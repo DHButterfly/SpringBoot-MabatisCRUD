@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<!--suppress ALL-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>童话</title>
+</head>
+<body>
+<h3>成功请求!</h3><br>
+<h4 th:utext="${hello}"></h4><br>
+<!--使用utext不会转义特殊字符，使用text会转义特殊字符(将hello中原生的h2标签转义成普通字符串)-->
+<div id="div01"  class="mydiv" th:id="${hello}" th:class="${replace}" th:text="${hello}">使用thymeleaf语法取出map中的值</div>
+<h4 th:text="${user}" th:each="user:${users}"></h4><br>
+<!--在h4中会输出三个h4-->
+<h4>
+    <!--span中只会输出一个h4-->
+    <span th:each="user:${users}">[[${user}]]</span>
+</h4>
+</body>
+</html>
