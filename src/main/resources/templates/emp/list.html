@@ -71,7 +71,7 @@
 								</tr>
 							</thead>
 							<tbody>
-							    <tr th:each="emp:${emps}">
+							    <tr th:each="emp:${emps.list}">
 									<td th:text="${emp.id}"></td>
 									<td>[[${emp.lastName}]]</td>
 									<td th:text="${emp.email}"></td>
@@ -95,6 +95,56 @@
 				</form>
 			</div>
 		</div>
+        <!--分页功能-->
+	<div class="modal-footer no-margin-top" style="font-size:16px" >
+		<ul class="pagination">
+			<div style=" text-align: center">
+			<li>
+				<a th:href="'/emps?pageNum=0'">首页&ensp;</a>
+			</li>
+			</div>
+			<div style="text-align: center">
+			<li>
+				<!--《--&laquo;-->
+				<a th:if="${not isFirstPage}" th:href="@{${'emps'}(pageNum=${pageNum - 1},pageSize=${pageSize})}" aria-label="Previous">
+					<span aria-hidden="true">&laquo;&ensp;</span>
+				</a>
+				<a th:if="${isFirstPage}" href="javascript:void(0);" aria-label="Previous">
+					<span aria-hidden="true">&laquo;&ensp;</span>
+				</a>
+			</li>
+			</div>
+			<li th:each="pageNo : ${#numbers.sequence(1, totalPages)}">
+				<div style="text-align: center">
+				<a th:if="${pageNum eq pageNo}" href="javascript:void(0);">
+					<span th:text="${pageNo}">&ensp;</span>
+				</a>
+				</div>
+				<div style="text-align: center">
+				<a th:if="${not (pageNum eq pageNo)}" th:href="@{${'emps'}(pageNum=${pageNo},pageSize=${pageSize})}">
+					<span th:text="${pageNo}">&ensp;</span>
+				</a>
+				</div>
+			</li>
+			<div style="text-align: center">
+			<li>
+                <!--下一页-->
+				<a th:if="${not isLastPage}" th:href="@{${'emps'}(pageNum=${pageNum+1},pageSize=${pageSize})}" aria-label="Next">
+					<span aria-hidden="true">&ensp;&raquo;&ensp;</span>
+				</a>
+				<a th:if="${isLastPage}" href="javascript:void(0);" aria-label="Next">
+					<span aria-hidden="true">&ensp;&raquo;&ensp;</span>
+					<!--&raquo;---》 -->
+				</a>
+			</li>
+			</div>
+			<div style="text-align: center">
+			<li>
+				<a th:href="'/emps?pageNum=' + ${emps.getTotal() - 1}">尾页</a>
+			</li>
+			</div>
+		</ul>
+	</div>
 
 		<!-- Bootstrap core JavaScript
     ================================================== -->

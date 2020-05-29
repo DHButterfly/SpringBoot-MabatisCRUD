@@ -83,6 +83,19 @@
 			<artifactId>druid</artifactId>
 			<version>1.1.20</version>
 		</dependency>
+		<!--mybatis分页功能-->
+		<!--https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper-->
+<!--		<dependency>-->
+<!--			<groupId>com.github.pagehelper</groupId>-->
+<!--			<artifactId>pagehelper</artifactId>-->
+<!--			<version>5.1.11</version>-->
+<!--		</dependency>-->
+        <!--配置文件写法-->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper-spring-boot-starter</artifactId>
+			<version>1.2.5</version>
+		</dependency>
 	</dependencies>
 
 	<build>

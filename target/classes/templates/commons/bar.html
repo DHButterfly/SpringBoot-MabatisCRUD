@@ -12,7 +12,8 @@
     <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-            <a class="nav-link" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">Sign out</a>
+            <!--点击退出，消除session-->
+            <a class="nav-link" id="out" th:href="@{/user/out}">Sign out</a>
         </li>
     </ul>
 </nav>
@@ -142,4 +143,13 @@
     </div>
 </nav>
 </body>
+<script type="text/javascript" src="asserts/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.js}"></script>
+<script type="text/javascript">
+    function out() {
+        var flag = window.confirm("你真的要退出吗?");
+        if (flag) {
+            window.location.href = "/user/out";
+        }
+    }
+</script>
 </html>

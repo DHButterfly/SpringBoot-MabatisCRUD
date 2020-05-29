@@ -177,7 +177,21 @@
 						</ul>
 					</div>
 				</nav>
-
+				<!--
+			如何为浏览器定制错误的页面；
+			1）、有模板引擎的情况下；error/状态码;[将错误页面命名为  错误状态码.html 放在模板引擎文件夹里面的
+			 error文件夹下]，发生此状态码的错误就会来到  对应的页面；
+​			我们可以使用4xx和5xx作为错误页面的文件名来匹配这种类型的所有错误，精确优先（优先寻找精确的状态码.html）；
+​			页面能获取的信息；
+​				timestamp：时间戳
+​				status：状态码
+​				error：错误提示
+​				exception：异常对象
+​				message：异常消息
+​				errors：JSR303数据校验的错误都在这里
+​			2）、没有模板引擎（），静模板引擎找不到这个错误页面态资源文件夹下找；
+​			3）、以上都没有错误页面，就是默认来到SpringBoot默认的错误提示页面；
+				-->
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 					<h1>status:[[${status}]]</h1><br>
 					<h1>timestamp:[[${timestamp}]]</h1>

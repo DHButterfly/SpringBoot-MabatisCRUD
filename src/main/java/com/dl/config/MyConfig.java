@@ -45,6 +45,7 @@ public class MyConfig implements WebMvcConfigurer {
                 registry.addViewController("/").setViewName("login");
                 registry.addViewController("/index.html").setViewName("login");//
                 registry.addViewController("/main.html").setViewName("dashboard");//
+                registry.addViewController("/register.html").setViewName("register");
             }
         };
         return adapter;
@@ -67,6 +68,6 @@ public class MyConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         //  "/**"拦截任意多层路径下的请求,excludePathPatterns排除拦截资源路径
         registry.addInterceptor(new LoginHandlerIntercepter()).addPathPatterns("/**")
-                .excludePathPatterns("/index.html","/","/user/login","/webjars/**","/asserts/**");
+                .excludePathPatterns("/index.html","/","/user/login","/webjars/**","/asserts/**","/user/verifyCode","/register.html","/user/register");
     }
 }
