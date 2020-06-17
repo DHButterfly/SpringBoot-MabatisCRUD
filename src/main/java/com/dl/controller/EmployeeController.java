@@ -66,6 +66,8 @@ public class EmployeeController {
         model.addAttribute("totalPages", pageInfo.getPages());
         //是否是最后一页
         model.addAttribute("isLastPage", pageInfo.isIsLastPage());
+        //总的记录数
+        model.addAttribute("record", pageInfo.getTotal());
         return "emp/list";
     }
     //点击员工添加来到员工添加页面 get请求
