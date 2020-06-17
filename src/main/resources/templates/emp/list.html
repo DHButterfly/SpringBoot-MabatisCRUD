@@ -40,6 +40,11 @@
 				-webkit-animation: chartjs-render-animation 0.001s;
 				animation: chartjs-render-animation 0.001s;
 			}
+			.button-hover:hover{
+				background: #AAA;
+				color: #0c5460;
+				box-shadow: 2px 2px 3px #888888;
+			}
 		</style>
 	</head>
 
@@ -97,20 +102,23 @@
 		</div>
         <!--分页功能-->
 	<div class="modal-footer no-margin-top" style="font-size:16px" >
-		<ul style="font-size:12px;float: left">
-		当前第<span th:text="${pageNum}"></span>页，共
-		<span th:text="${totalPages}"></span>
-		页,共<span th:text="${record}">&emsp;&emsp;</span>条数据
+		<ul style="font-size:12px;text-decoration: none;list-style-type: none;line-height: 24px;height: 24px;text-align: center;margin-right: 50px;">
+			<li style="display: inline;">当前第<span th:text="${pageNum}"></span>页，共
+			<span th:text="${totalPages}"></span>
+			页,共<span th:text="${record}">&emsp;&emsp;</span>条数据
+			</li>
+			<li style="display: inline;">
+				<input type="text" style="width:50px;height: 16px;line-height: 24px;margin-left: 10px;" placeholder="请输入页码"  id="pgSize" />
+				<span class="button-hover" onclick="pageMethod()" style="height: 16px;line-height: 24px;padding: 3px 5px;cursor: pointer;text-align: center;background: #EEE;border: 1px solid #BBB;border-radius: 4px;">跳转</span>
+			</li>
 		</ul>
+
 		<ul class="pagination">
-			<div style=" text-align: center">
 			<li>
 				<a th:href="'/emps?pageNum=0'">首页&ensp;</a>
 			</li>
-			</div>
-			<div style="text-align: center">
 			<li>
-				<!--《--&laquo;-->
+				<!--上一页《--&laquo;-->
 				<a th:if="${not isFirstPage}" th:href="@{${'emps'}(pageNum=${pageNum - 1},pageSize=${pageSize})}" aria-label="Previous">
 					<span aria-hidden="true">&laquo;&ensp;</span>
 				</a>
@@ -118,20 +126,17 @@
 					<span aria-hidden="true">&laquo;&ensp;</span>
 				</a>
 			</li>
-			</div>
+            <!--待完善判断是否当前页面高亮-->
 			<li th:each="pageNo : ${#numbers.sequence(1, totalPages)}">
 				<div style="text-align: center">
 				<a th:if="${pageNum eq pageNo}" href="javascript:void(0);">
 					<span th:text="${pageNo}">&ensp;</span>
 				</a>
 				</div>
-				<div style="text-align: center">
 				<a th:if="${not (pageNum eq pageNo)}" th:href="@{${'emps'}(pageNum=${pageNo},pageSize=${pageSize})}">
 					<span th:text="${pageNo}">&ensp;</span>
 				</a>
-				</div>
 			</li>
-			<div style="text-align: center">
 			<li>
                 <!--下一页-->
 				<a th:if="${not isLastPage}" th:href="@{${'emps'}(pageNum=${pageNum+1},pageSize=${pageSize})}" aria-label="Next">
@@ -142,12 +147,9 @@
 					<!--&raquo;---》 -->
 				</a>
 			</li>
-			</div>
-			<div style="text-align: center">
 			<li>
 				<a th:href="'/emps?pageNum=' + ${emps.getTotal() - 1}">尾页</a>
 			</li>
-			</div>
 		</ul>
 	</div>
 
@@ -170,6 +172,19 @@
 				$("#deleteEmpForm").attr("action",$(this).attr("del_uri")).submit();
 				return false;
             });
+	    </script>
+	    <script>
+			//设置数据显示条数
+			function pageMethod(){
+				var size=$("#pgSize").val();
+				var reg=/^\d+$/;
+				var result= reg.test(size);//正则匹配数字
+				if(result){
+					window.location.href="http://localhost:8080/emps?pageNum="+size+"&pageSize=5";
+				}else{
+					alert("请输入数字");
+				}
+			}
 		</script>
 		<!-- Graphs -->
 		<script type="text/javascript" src="asserts/js/Chart.min.js"></script>
@@ -202,7 +217,5 @@
 				}
 			});
 		</script>
-
 	</body>
-
 </html>
