@@ -97,6 +97,11 @@
 		</div>
         <!--分页功能-->
 	<div class="modal-footer no-margin-top" style="font-size:16px" >
+		<ul style="font-size:12px;float: left">
+		当前第<span th:text="${pageNum}"></span>页，共
+		<span th:text="${totalPages}"></span>
+		页,共<span th:text="${record}">&emsp;&emsp;</span>条数据
+		</ul>
 		<ul class="pagination">
 			<div style=" text-align: center">
 			<li>
